@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Error Clientes</title>
+<main>
+	<h1 class="display-1 p-3" >Error en entrada de clientes</h1>
+	<div class="container mt-5">
+		<div class="alert alert-danger" role="alert">
+			<h4 class="alert-heading" th:text="${errorMessage}">¡Ha ocurrido un error!</h4>
+			<p>Lo sentimos, se ha producido un error en el servidor.</p>
+			<hr>
+			<p>
+				Email incorrecto: <strong th:text="${email}"></strong>
+			</p>
+			<p>
+				Error detallado: <strong th:text="${detailedError}"></strong>
+			</p>
+			<p>Por favor, inténtelo de nuevo más tarde o contacte con el
+				administrador del sistema.</p>
+		</div>
+	</div>
+</main>

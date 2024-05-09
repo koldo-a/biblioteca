@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Clientes</title>
+<main class="container">
+	<h1>Clientes</h1>
+
+	<p>
+		<a class="btn btn-primary" th:href="@{/cliente}">Añadir cliente</a>
+	</p>
+
+	<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
+		<div th:each="cliente: ${clientes}" class="col">
+			<div class="card h-100">
+				<img th:src="${'https://picsum.photos/300/200?' + cliente.id}" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 th:text="${cliente.nombre}" class="card-title">Card title</h5>
+
+
+				</div>
+				<div class="card-footer d-flex justify-content-around">
+<!--					<a class="btn btn-sm btn-primary"-->
+<!--						th:href="${'cliente/' + cliente.id}">Editar cliente</a> <a class="btn btn-sm btn-danger"-->
+<!--						th:href="${'clientes/' + cliente.id + '/borrar'}"><i-->
+<!--							class="bi bi-trash"></i></a></small>-->
+							<a class="btn btn-sm btn-primary" th:href="@{'/editarCliente/' + ${cliente.id}}">Editar cliente</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>

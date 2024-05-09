@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listado de Clientes</title>
+</head>
+
+<body>
+	<main>
+		<h1 class="display-4 p-3"></h1>
+		<h1 class="display-4 p-3"></h1>
+		<h1 class="display-4 p-3">Clientes</h1>
+
+		<form th:action="@{/guardarCliente}" method="post" th:object="${cliente}">
+			<div class="form-group mb-3 mt-3  p-3">
+				<input type="hidden" th:field="*{id}">
+				<input id="primerCampo" class="form-control" th:field="*{nombre}" placeholder="Nombre" autofocus>
+				<span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+				<input class="form-control" th:field="*{apellido}" placeholder="Apellido">
+				<span class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
+				<input class="form-control" th:field="*{email}" placeholder="Email">
+				<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+				<button class="btn btn-primary" type="submit">Guardar</button>
+			</div>
+		</form>
+
+		<h2 class="display-2 p-3">Listado de Clientes</h2>
+		<table class="table table-striped table-hover table-bordered table-condensed table-responsive">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Email</th>
+					<th>Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterar sobre la lista de clientes y mostrar cada uno -->
+				<tr th:each="cliente : ${clientes}">
+					<td th:text="${cliente.id}"></td>
+					<td th:text="${cliente.nombre}"></td>
+					<td th:text="${cliente.apellido}"></td>
+					<td th:text="${cliente.email}"></td>
+					<td>
+						<a th:href="@{'/borrarCliente/' + ${cliente.id}}">Borrar</a> |
+						<a th:href="@{'/editarCliente/'+ ${cliente.id}}">Editar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+
+</html>

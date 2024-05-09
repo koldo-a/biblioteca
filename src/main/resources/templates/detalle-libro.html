@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Detalle Libros</title>
+<main>
+	<h1 class="display-1 p-3"></h1>
+	<h1 class="display-1 p-3">Libros</h1>
+
+	<h1>Detalles del Libro</h1>
+	<div>
+		<table class="table table-bordered">
+			<tr>
+				<th>ID</th>
+				<td th:text="${libro.id}"></td>
+			</tr>
+			<tr>
+				<th>Nombre</th>
+				<td th:text="${libro.nombre}"></td>
+			</tr>
+			<tr>
+				<th>Descripción</th>
+				<td th:text="${libro.descripcion}"></td>
+			</tr>
+			<tr>
+				<th>ISBN</th>
+				<td th:text="${libro.isbn}"></td>
+			</tr>
+			<tr>
+				<th>Autor</th>
+				<td th:text="${libro.autor.nombre} + ' ' + ${libro.autor.apellido}"></td>
+			</tr>
+		</table>
+
+	</div>
+</main>

@@ -1,0 +1,35 @@
+.navbar-text {
+	color: #73ff00;
+}
+
+main {
+	margin: 0% 10% 0% 10%;
+}
+
+.form-control {
+	width: 80%;
+	margin: 1% 0% 1% 0%;
+}
+
+table {
+	max-width: 1000px;
+}
+
+.backlink {
+	text-align: right;
+	font-size: 100px;
+	margin: 0% 25% 0% 0%;
+}
+
+.contenedor {
+	background-color : #e8eafd;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	background-color: #e8eafd;
+}
+
+nav {
+	position: fixed !important;
+	width: 100%;
+}
