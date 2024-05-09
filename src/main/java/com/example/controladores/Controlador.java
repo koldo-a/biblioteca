@@ -53,11 +53,37 @@ public class Controlador {
 //        model.addAttribute("libro", new Libro());
 //        return "listado-libros";
 //    }
+//    @GetMapping("/listado-libros")
+//    public String listarLibros(Model model, 
+//                                @RequestParam(required = false) String nombre, 
+//                                @RequestParam(required = false) String isbn,
+//                                @RequestParam(required = false) String nombreAutor) {
+//        Iterable<Libro> libros;
+//        
+//        if (nombre != null && !nombre.isEmpty()) {
+//            // Buscar por nombre
+//            libros = libroRepository.findByNombreContainingIgnoreCase(nombre);
+//        } else if (isbn != null && !isbn.isEmpty()) {
+//            // Buscar por ISBN
+//            libros = libroRepository.findByIsbn(isbn);
+//        } else if (nombreAutor != null && !nombreAutor.isEmpty()) {
+//            // Buscar por autor
+//            libros = libroRepository.findByAutorNombreContainingIgnoreCase(nombreAutor);
+//        } else {
+//            // Si no se proporcionan criterios de búsqueda, retornar todos los libros
+//            libros = libroRepository.findAll();
+//        }
+//        
+//        model.addAttribute("libros", libros);
+//        model.addAttribute("libro", new Libro());
+//        return "listado-libros";
+//    }
+//    
     @GetMapping("/listado-libros")
     public String listarLibros(Model model, 
                                 @RequestParam(required = false) String nombre, 
                                 @RequestParam(required = false) String isbn,
-                                @RequestParam(required = false) String nombreAutor) {
+                                @RequestParam(required = false) String autor) {
         Iterable<Libro> libros;
         
         if (nombre != null && !nombre.isEmpty()) {
@@ -66,9 +92,9 @@ public class Controlador {
         } else if (isbn != null && !isbn.isEmpty()) {
             // Buscar por ISBN
             libros = libroRepository.findByIsbn(isbn);
-        } else if (nombreAutor != null && !nombreAutor.isEmpty()) {
-            // Buscar por autor
-            libros = libroRepository.findByAutorNombreContainingIgnoreCase(nombreAutor);
+        } else if (autor != null && !autor.isEmpty()) {
+            // Buscar por nombre o apellido del autor
+        	libros = libroRepository.findByAutorNombreContainingIgnoreCaseOrAutorApellidoContainingIgnoreCase(autor, autor);
         } else {
             // Si no se proporcionan criterios de búsqueda, retornar todos los libros
             libros = libroRepository.findAll();
