@@ -6,7 +6,7 @@
 	<h1 id="heading" class="display-6 p-3"></h1>
 	<h1 id="heading" class="display-5 p-3">Libros</h1>
 	<div class="contenedor">
-		<div class="contenedor2">
+		<div sec:authorize="hasRole('ROLE_ADMIN')" class="contenedor2">
 			<h2 class="display-6 p-3">Guardar Libros</h2>
 			<form th:action="@{/guardarLibro}" method="post" th:object="${libro}">
 				<div class="form-group mb-3 mt-3  p-3">
@@ -48,7 +48,7 @@
 				<th>Id</th>
 				<th>Autor</th>
 				<th>Detalle</th>
-				<th>Acción</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')" >Acción</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,7 +59,7 @@
 						th:text="${libro.autor.nombre}+' '+${libro.autor.apellido}"></a><span
 						th:if="${libro.autor == null}">Autor Desconocido</span></td>
 				<td><a th:href="@{/libro/{id}(id=${libro.id})}" th:text="${libro.nombre}"></a></td>
-				<td><a th:href="${'borrarLibro/' + libro.id}">Borrar</a> |
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'borrarLibro/' + libro.id}">Borrar</a> |
 					<a th:href="@{'/editarLibro/'+ ${libro.id}}">Editar</a>
 				</td>
 			</tr>
