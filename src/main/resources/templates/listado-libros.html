@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
-	xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
 <title>Libros</title>
 <main>
 	<h1 id="heading" class="display-6 p-3"></h1>
@@ -11,15 +10,12 @@
 			<h2 class="display-6 p-3">Guardar Libros</h2>
 			<form th:action="@{/guardarLibro}" method="post" th:object="${libro}">
 				<div class="form-group mb-3 mt-3  p-3">
-					<input class="form-control" th:field="*{nombre}"
-						placeholder="Nombre" autofocus> <span class="text-danger"
-						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
-					<input class="form-control" th:field="*{descripcion}"
-						placeholder="Descripcion" autofocus> <span
+					<input class="form-control" th:field="*{nombre}" placeholder="Nombre" autofocus> <span
+						class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+					<input class="form-control" th:field="*{descripcion}" placeholder="Descripcion" autofocus> <span
 						class="text-danger" th:if="${#fields.hasErrors('descripcion')}"
-						th:errors="*{descripcion}"></span> <input class="form-control"
-						th:field="*{isbn}" placeholder="ISBN" autofocus> <span
-						class="text-danger" th:if="${#fields.hasErrors('isbn')}"
+						th:errors="*{descripcion}"></span> <input class="form-control" th:field="*{isbn}"
+						placeholder="ISBN" autofocus> <span class="text-danger" th:if="${#fields.hasErrors('isbn')}"
 						th:errors="*{isbn}"></span>
 
 					<button class="btn btn-primary" type="submit">Guardar</button>
@@ -36,11 +32,9 @@
 			<h2 class="display-6 p-3">Búsqueda</h2>
 			<form th:action="@{/listado-libros}" method="get">
 				<div class="form-group mb-3 mt-3  p-3">
-					<input class="form-control" type="text" name="nombre"
-						placeholder="Buscar por nombre"> <input
-						class="form-control" type="text" name="isbn"
-						placeholder="Buscar por ISBN"> <input class="form-control"
-						type="text" name="autor"
+					<input class="form-control" type="text" name="nombre" placeholder="Buscar por nombre"> <input
+						class="form-control" type="text" name="isbn" placeholder="Buscar por ISBN"> <input
+						class="form-control" type="text" name="autor"
 						placeholder="Buscar por autor (nombre o apellidos)">
 					<button class="btn btn-primary" type="submit">Buscar</button>
 				</div>
@@ -48,8 +42,7 @@
 		</div>
 	</div>
 	<h2 class="display-5 p-3">Listado de Libros</h2>
-	<table
-		class="table table-striped table-hover table-bordered table-condensed table-responsive">
+	<table class="table table-striped table-hover table-bordered table-condensed table-responsive">
 		<thead>
 			<tr>
 				<th>Id</th>
@@ -62,13 +55,13 @@
 			<!-- Iterar sobre la lista de libros y mostrar cada uno -->
 			<tr th:each="libro : ${libros}">
 				<td th:text="${libro.id}"></td>
-				<td><a th:if="${libro.autor != null}"
-					th:href="@{/libro/{id}(id=${libro.id})}"
-					th:text="${libro.autor.nombre}+' '+${libro.autor.apellido}"></a><span
-					th:if="${libro.autor == null}">Autor Desconocido</span></td>
-				<td><a th:href="@{/libro/{id}(id=${libro.id})}"
-					th:text="${libro.nombre}"></a></td>
-				<td><a th:href="${'borrarLibro/' + libro.id}">Borrar</a></td>
+				<td><a th:if="${libro.autor != null}" th:href="@{/libro/{id}(id=${libro.id})}"
+						th:text="${libro.autor.nombre}+' '+${libro.autor.apellido}"></a><span
+						th:if="${libro.autor == null}">Autor Desconocido</span></td>
+				<td><a th:href="@{/libro/{id}(id=${libro.id})}" th:text="${libro.nombre}"></a></td>
+				<td><a th:href="${'borrarLibro/' + libro.id}">Borrar</a> |
+					<a th:href="@{'/editarLibro/'+ ${libro.id}}">Editar</a>
+				</td>
 			</tr>
 
 		</tbody>

@@ -37,48 +37,7 @@ public class Controlador {
 	    model.addAttribute("libro", libro);
 	    return "detalle-libro";
 	}
-//el viejo buscaba sólo por nombre e isbn
-    
-//	@GetMapping("/listado-libros")
-//    public String listarLibros(Model model, @RequestParam(required = false) String nombre, @RequestParam(required = false) String isbn) {
-//        Iterable<Libro> libros;
-//        if (nombre != null && !nombre.isEmpty()) {
-//            libros = libroRepository.findByNombreContainingIgnoreCase(nombre);
-//        } else if (isbn != null && !isbn.isEmpty()) {
-//            libros = libroRepository.findByIsbn(isbn);
-//        } else {
-//            libros = libroRepository.findAll();
-//        }
-//        model.addAttribute("libros", libros);
-//        model.addAttribute("libro", new Libro());
-//        return "listado-libros";
-//    }
-//    @GetMapping("/listado-libros")
-//    public String listarLibros(Model model, 
-//                                @RequestParam(required = false) String nombre, 
-//                                @RequestParam(required = false) String isbn,
-//                                @RequestParam(required = false) String nombreAutor) {
-//        Iterable<Libro> libros;
-//        
-//        if (nombre != null && !nombre.isEmpty()) {
-//            // Buscar por nombre
-//            libros = libroRepository.findByNombreContainingIgnoreCase(nombre);
-//        } else if (isbn != null && !isbn.isEmpty()) {
-//            // Buscar por ISBN
-//            libros = libroRepository.findByIsbn(isbn);
-//        } else if (nombreAutor != null && !nombreAutor.isEmpty()) {
-//            // Buscar por autor
-//            libros = libroRepository.findByAutorNombreContainingIgnoreCase(nombreAutor);
-//        } else {
-//            // Si no se proporcionan criterios de búsqueda, retornar todos los libros
-//            libros = libroRepository.findAll();
-//        }
-//        
-//        model.addAttribute("libros", libros);
-//        model.addAttribute("libro", new Libro());
-//        return "listado-libros";
-//    }
-//    
+
     @GetMapping("/listado-libros")
     public String listarLibros(Model model, 
                                 @RequestParam(required = false) String nombre, 
@@ -173,6 +132,12 @@ public class Controlador {
 		model.addAttribute("cliente", cliente);
 		return "formulario-edicion-cliente";
 	}
+	@GetMapping("/editarLibro/{id}")
+	public String editarLibro(@PathVariable Long id, Model model) {
+		Libro libro = libroService.obtenerLibroPorId(id);
+		model.addAttribute("libro", libro);
+		return "formulario-edicion-libro";
+	}
 
 	@PostMapping("/guardarCambiosCliente")
 	public String guardarCambiosCliente(@Valid Cliente cliente, BindingResult bindingResult) {
@@ -184,6 +149,17 @@ public class Controlador {
 		clienteService.modificar(cliente); // Guardar los cambios en el cliente
 
 		return "redirect:/listado-clientes"; // Redirigir al listado de clientes u otra vista apropiada
+	}
+	@PostMapping("/guardarCambiosLibro")
+	public String guardarCambiosLibro(@Valid Libro libro, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			// Manejar los errores de validación si es necesario
+			return "formulario-edicion-libro"; // Volver al formulario de edición
+		}
+		
+		libroService.modificar(libro); // Guardar los cambios en el cliente
+		
+		return "redirect:/listado-libros"; // Redirigir al listado de clientes u otra vista apropiada
 	}
 
 	@GetMapping("login")

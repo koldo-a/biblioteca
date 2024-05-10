@@ -33,7 +33,7 @@ public class WebSecurityConfig {
 			""")
 	    	.authoritiesByUsernameQuery("""
     			SELECT email, CONCAT('ROLE_',rol)
-    			FROM gestionpedidoscrud.usuarios
+    			FROM biblioteca.usuarios
 				WHERE email = ?
 			""");
 	}
@@ -48,7 +48,7 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(x -> x.disable()).authorizeHttpRequests(
 				(requests) -> requests
-					.requestMatchers("/producto").hasRole("ADMIN")
+					.requestMatchers("/libro").hasRole("ADMIN")
 					.requestMatchers(new String[]{"/css/**", "/js/**"}).permitAll()
 					.requestMatchers("/api/**").permitAll()
 					.anyRequest().authenticated()
