@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<th>Autor</th>
-				<td th:text="${libro.autor.nombre} + ' ' + ${libro.autor.apellido}"></td>
+				<td th:if="${libro.autor != null}" th:text="${libro.autor.nombre} + ' ' + ${libro.autor.apellido}"></td><td th:if="${libro.autor == null}">Autor Desconocido</td>
 			</tr>
 		</table>
 

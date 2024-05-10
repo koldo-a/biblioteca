@@ -26,10 +26,18 @@ table {
 	border-radius: 10px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	background-color: #e8eafd;
 }
 
 nav {
 	position: fixed !important;
 	width: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+	
+	&:hover {
+		color: #6f00ff;
+	}
 }
