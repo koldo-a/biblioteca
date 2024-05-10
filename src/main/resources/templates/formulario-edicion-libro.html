@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<main>
+	<main sec:authorize="hasRole('ROLE_ADMIN')">
 		<h1 class="display-1 p-3"></h1>
 		<h1 class="display-1 p-3">Editar Libro</h1>
 

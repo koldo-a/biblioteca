@@ -33,7 +33,7 @@
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Email</th>
-					<th>Acción</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Acción</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,7 +43,7 @@
 					<td th:text="${cliente.nombre}"></td>
 					<td th:text="${cliente.apellido}"></td>
 					<td th:text="${cliente.email}"></td>
-					<td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
 						<a th:href="@{'/borrarCliente/' + ${cliente.id}}">Borrar</a> |
 						<a th:href="@{'/editarCliente/'+ ${cliente.id}}">Editar</a>
 					</td>
