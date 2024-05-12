@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.entidades.Autor;
 import com.example.entidades.Cliente;
 import com.example.entidades.Libro;
 import com.example.repositorios.LibroRepository;
+import com.example.servicios.AutorService;
 import com.example.servicios.ClienteService;
 import com.example.servicios.LibroService;
 
@@ -24,6 +26,9 @@ public class Controlador {
 
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private AutorService autorService;
 
 	@Autowired
 	private LibroService libroService;

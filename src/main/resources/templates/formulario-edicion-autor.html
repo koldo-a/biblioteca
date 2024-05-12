@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Autor</title>
+</head>
+<body>
+<main sec:authorize="hasRole('ROLE_ADMIN')">
+    <h1 class="display-1 p-3"></h1>
+    <h1 class="display-1 p-3">Editar Autor</h1>
+    
+    <form th:action="@{/guardarCambiosAutor}" method="post" th:object="${autor}">
+        <div class="form-group mb-3 mt-3  p-3">
+            <input type="hidden" th:field="*{id}">
+            <input class="form-control" th:field="*{nombre}" placeholder="Nombre" autofocus>
+            <span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+            <input class="form-control" th:field="*{apellido}" placeholder="Apellido">
+            <span class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
+            <input class="form-control" th:field="*{email}" placeholder="Email">
+            <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            
+            <button class="btn btn-primary" type="submit">Actualizar</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

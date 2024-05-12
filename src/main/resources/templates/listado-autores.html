@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listado de Autores</title>
+</head>
+
+<body>
+	<main>
+		<h1 class="display-4 p-3"></h1>
+		<h1 class="display-4 p-3"></h1>
+		<h1 class="display-4 p-3">Autores</h1>
+
+		<form th:action="@{/guardarAutor}" method="post" th:object="${autor}">
+			<div class="form-group mb-3 mt-3  p-3">
+				<input type="hidden" th:field="*{id}">
+				<input id="primerCampo" class="form-control" th:field="*{nombre}" placeholder="Nombre" autofocus>
+				<span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+				<input class="form-control" th:field="*{apellido}" placeholder="Apellido">
+				<span class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></span>
+				<input class="form-control" th:field="*{email}" placeholder="Email">
+				<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+				<button class="btn btn-primary" type="submit">Guardar</button>
+			</div>
+		</form>
+
+		<h2 class="display-2 p-3">Listado de Autores</h2>
+		<table class="table table-striped table-hover table-bordered table-condensed table-responsive">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Email</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterar sobre la lista de autors y mostrar cada uno -->
+				<tr th:each="autor : ${autores}">
+					<td th:text="${autor.id}"></td>
+					<td th:text="${autor.nombre}"></td>
+					<td th:text="${autor.apellido}"></td>
+					<td th:text="${autor.email}"></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
+						<a th:href="@{'/borrarAutor/' + ${autor.id}}">Borrar</a> |
+						<a th:href="@{'/editarAutor/'+ ${autor.id}}">Editar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+
+</html>

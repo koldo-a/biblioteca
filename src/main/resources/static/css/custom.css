@@ -28,6 +28,12 @@ table {
 	grid-template-columns: 1fr 1fr;
 }
 
+.contenedor3 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 nav {
 	position: fixed !important;
 	width: 100%;

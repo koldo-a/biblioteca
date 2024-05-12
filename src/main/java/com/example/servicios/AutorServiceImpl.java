@@ -14,12 +14,12 @@ public class AutorServiceImpl implements AutorService {
 	@Autowired
 	AutorRepository autorRepository;
 
-	private Iterable<Autor> autors = new ArrayList<>();
+	private Iterable<Autor> autores = new ArrayList<>();
 
 	@Override
-	public Iterable<Autor> listarAutors() {
-		autors = autorRepository.findAll();
-		return autors;
+	public Iterable<Autor> listarAutores() {
+		autores = autorRepository.findAll();
+		return autores;
 	}
 
 	@Override

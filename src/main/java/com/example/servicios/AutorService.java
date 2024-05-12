@@ -9,7 +9,7 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public interface AutorService {
-    Iterable<Autor> listarAutors();
+    Iterable<Autor> listarAutores();
     void guardar(Autor autor);
     void borrar(Long id);
 	void modificar(Autor autor);

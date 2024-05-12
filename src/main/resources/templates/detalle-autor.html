@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Detalle Autors</title>
+<main>
+	<h1 class="display-1 p-3"></h1>
+	<h1 class="display-1 p-3">Autores</h1>
+
+	<h1>Detalles del Autor</h1>
+	<div>
+		<table class="table table-bordered">
+			<tr>
+				<th>ID</th>
+				<td th:text="${autor.id}"></td>
+			</tr>
+			<tr>
+				<th>Nombre</th>
+				<td th:text="${autor.nombre}"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td th:text="${autor.email}"></td>
+			</tr>
+		</table>
+
+	</div>
+</main>
