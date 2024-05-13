@@ -62,8 +62,9 @@
 							th:text="${libro.autor.nombre}+' '+${libro.autor.apellido}"></a><span
 							th:if="${libro.autor == null}">Autor Desconocido</span></td>
 					<td><a th:href="@{/libro/{id}(id=${libro.id})}" th:text="${libro.nombre}"></a></td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'borrarLibro/' + libro.id}">Borrar</a> |
-						<a th:href="@{'/editarLibro/'+ ${libro.id}}">Editar</a>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-sm btn-primary" th:href="@{'/editarLibro/'+ ${libro.id}}"><i class="bi bi-pencil-square"></i></a>
+					<a class="btn btn-sm btn-danger" th:href="${'borrarLibro/' + libro.id}"><i class="bi bi-trash"></i></a>
+					
 					</td>
 				</tr>
 			</tbody>

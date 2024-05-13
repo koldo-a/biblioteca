@@ -33,6 +33,7 @@ public class Libro {
 	
 	@NotNull
 	@NotBlank
+	@Size(max = 255, message = "El nombre debe tener como máximo 255 caracteres")
 	private String nombre;
 	
     @NotNull
@@ -40,6 +41,7 @@ public class Libro {
     @Pattern(regexp = "\\d{10,13}", message = "El ISBN debe contener solo dígitos")
     private String isbn;
     
+    @Size(max = 255, message = "La descripción debe tener como máximo 255 caracteres")
 	private String descripcion;
 	
     // Relación con Autor

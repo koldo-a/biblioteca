@@ -28,32 +28,94 @@
 					<li class="nav-item"><a class="nav-link" th:href="@{/}">Principal</a></li>
 					<li class="nav-item"><a class="nav-link"
 						th:href="@{/listado-libros}">Libros</a></li>
-					<li class="nav-item"><a class="nav-link" 
-					th:href="@{/listado-clientes}">Clientes</a></li>
-					<li class="nav-item"><a class="nav-link" 
-					th:href="@{/listado-autores}">Autores</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/listado-clientes}">Clientes</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/listado-autores}">Autores</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/listado-prestamos}">Préstamos</a></li>
 				</ul>
 				<ul class="navbar-nav mb-2 mb-md-0">
-					<li class="navbar-text" sec:authorize="isAuthenticated()"
+					<li sec:authorize="isAuthenticated()"><button
+							type="button" class="btn btn-dark" data-bs-toggle="modal"
+							data-bs-target="#exampleModal">
+							<i class="bi bi-bag-fill"></i>
+						</button></li>
+					<li id="usuario-activo" class="navbar-text" sec:authorize="isAuthenticated()"
 						sec:authentication="name">Usuario</li>
 					<li class="nav-item" sec:authorize="!isAuthenticated()"><a
 						class="nav-link" th:href="@{/login}">Inicio sesión</a></li>
 					<li class="nav-item" sec:authorize="isAuthenticated()"><form
 							th:action="@{/logout}" method="post">
-							<button class="nav-link">Cierre de sesión</button>
+							<button class="nav-link">
+								<i class="bi bi-box-arrow-right"></i>
+							</button>
 						</form></li>
 				</ul>
-
 			</div>
 		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Préstamos realizados</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+					
+					<table class="table table-striped table-hover table-bordered table-condensed table-responsive">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Libro</th>
+					<th>Usuario</th>
+					<th>Fecha préstamo</th>
+					<th>Fecha devolución</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterar sobre la lista de prestamos y mostrar cada uno -->
+				<tr th:each="prestamo : ${prestamos}">
+					<td th:text="${prestamo.id}"></td>
+					<td th:text="${prestamo.libro.nombre}"></td>
+					<td th:text="${prestamo.usuario.nombre}+' '+${prestamo.usuario.apellido}"></td>
+					<td th:text="${prestamo.fechaPrestamo}"></td>
+					<td th:text="${prestamo.fechaDevolucion}"></td>
+					
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
+						<a th:href="@{'/borrarPrestamo/' + ${prestamo.id}}">Borrar</a> |
+						<a th:href="@{'/editarPrestamo/'+ ${prestamo.id}}">Editar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+					
+					
+					Prestamo 1...</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary">Guardar cambios</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Button trigger modal -->
+
+
 	</nav>
 	<div th:replace="${contenido}">CONTENIDO</div>
-	<div class="backlink"><a href="javascript:history.back()"><i class="bi bi-skip-backward"></i></a>
+	<div class="backlink">
+		<a href="javascript:history.back()"><i class="bi bi-skip-backward"></i></a>
 	</div>
 	<footer class="p-2 text-bg-dark mt-3">
 		<p>&copy;2024 Koldo Arretxea</p>
 	</footer>
-	<script
-		src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

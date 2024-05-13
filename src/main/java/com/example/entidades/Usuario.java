@@ -32,6 +32,11 @@ public class Usuario {
 	private String nombre;
 	
 	@NotNull
+	@NotBlank
+	@Size(min = 3, max = 100)
+	private String apellido;
+	
+	@NotNull
 	@Email
 	@Size(max = 100)
 	private String email;

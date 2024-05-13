@@ -1,5 +1,7 @@
 .navbar-text {
 	color: #73ff00;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 main {
@@ -22,7 +24,7 @@ table {
 }
 
 .contenedor {
-	background-color : #e8eafd;
+	background-color: #e8eafd;
 	border-radius: 10px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -37,13 +39,20 @@ table {
 nav {
 	position: fixed !important;
 	width: 100%;
+	z-index: 9999;
 }
 
 a {
 	text-decoration: none;
 	color: #000000;
-	
-	&:hover {
-		color: #6f00ff;
+	&:hover
+	{
+	color: #6f00ff;
 	}
 }
+
+.modal {
+	z-index: 9999;
+	color: #ffffff;
+}
+

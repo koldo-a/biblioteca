@@ -28,32 +28,6 @@ public class ControladorAutor {
 	    return "detalle-autor";
 	}
 
-//    @GetMapping("/listado-autores")
-//    public String listarAutors(Model model, 
-//                                @RequestParam(required = false) String nombre, 
-//                                @RequestParam(required = false) String isbn,
-//                                @RequestParam(required = false) String autor) {
-//        Iterable<Autor> autores;
-//        
-//        if (nombre != null && !nombre.isEmpty()) {
-//            // Buscar por nombre
-//            autores = autorRepository.findByNombreContainingIgnoreCase(nombre);
-//        } else if (isbn != null && !isbn.isEmpty()) {
-//            // Buscar por ISBN
-//            autores = autorRepository.findByIsbn(isbn);
-//        } else if (autor != null && !autor.isEmpty()) {
-//            // Buscar por nombre o apellido del autor
-//        	autores = autorRepository.findByAutorNombreContainingIgnoreCaseOrAutorApellidoContainingIgnoreCase(autor, autor);
-//        } else {
-//            // Si no se proporcionan criterios de búsqueda, retornar todos los autores
-//            autores = autorRepository.findAll();
-//        }
-//        
-//        model.addAttribute("autores", autores);
-//        model.addAttribute("autor", new Autor());
-//        return "listado-autores";
-//    }
-    
 	@PostMapping("/guardarAutor")
 	public String guardarAutor(@Valid Autor autor, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {

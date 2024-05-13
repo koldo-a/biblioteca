@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listado de Prestamos</title>
+</head>
+
+<body>
+	<main>
+		<h1 class="display-4 p-3"></h1>
+		<h1 class="display-4 p-3"></h1>
+		<h1 class="display-4 p-3">Préstamos</h1>
+
+		<form th:action="@{/guardarPrestamo}" method="post" th:object="${prestamo}">
+			<div class="form-group mb-3 mt-3  p-3">
+				<input type="hidden" th:field="*{id}">
+				<input id="primerCampo" class="form-control" th:field="*{id}" placeholder="IdPrestamo" autofocus>
+				<span class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+				<input class="form-control" th:field="*{libro}" placeholder="Libro">
+				<span class="text-danger" th:if="${#fields.hasErrors('libro')}" th:errors="*{libro}"></span>
+				<input class="form-control" th:field="*{usuario}" placeholder="Usuario">
+				<span class="text-danger" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></span>
+
+				<button class="btn btn-primary" type="submit">Guardar</button>
+			</div>
+		</form>
+
+		<h2 class="display-2 p-3">Listado de Préstamos</h2>
+		<table class="table table-striped table-hover table-bordered table-condensed table-responsive">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Libro</th>
+					<th>Usuario</th>
+					<th>Fecha préstamo</th>
+					<th>Fecha devolución</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Iterar sobre la lista de prestamos y mostrar cada uno -->
+				<tr th:each="prestamo : ${prestamos}">
+					<td th:text="${prestamo.id}"></td>
+					<td th:text="${prestamo.libro.nombre}"></td>
+					<td th:text="${prestamo.usuario.nombre}+' '+${prestamo.usuario.apellido}"></td>
+					<td th:text="${prestamo.fechaPrestamo}"></td>
+					<td th:text="${prestamo.fechaDevolucion}"></td>
+					
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
+						<a th:href="@{'/borrarPrestamo/' + ${prestamo.id}}">Borrar</a> |
+						<a th:href="@{'/editarPrestamo/'+ ${prestamo.id}}">Editar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+
+</html>

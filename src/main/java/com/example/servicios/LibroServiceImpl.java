@@ -44,11 +44,11 @@ public class LibroServiceImpl implements LibroService {
 //    comentario
 	public LibroServiceImpl(UsuarioRepository usuarioRepository, LibroRepository productoRepository,
 			ClienteRepository clienteRepository) {
-		usuarioRepository.save(Usuario.builder().nombre("Javier").email("javier@email.net")
+		usuarioRepository.save(Usuario.builder().nombre("Javier").apellido("Lete").email("javier@email.net")
 				.password("$2a$12$mof.u/4EIo58hR7On9DnPevyqBC7kb9FHzT.LN/BjF8xOqQVTP1NO").rol("ADMIN").build());
-		usuarioRepository.save(Usuario.builder().nombre("Koldo").email("koldo@email.net")
+		usuarioRepository.save(Usuario.builder().nombre("Koldo").apellido("Arretxea").email("koldo@email.net")
 				.password("$2a$12$NhIMIVI5wNYc97crXmW9rupNsEbeea1BxPu.H0gSDkiDQrhhmXeZO").rol("ADMIN").build());
-		usuarioRepository.save(Usuario.builder().nombre("Pepe").email("pepe@email.net")
+		usuarioRepository.save(Usuario.builder().nombre("Pepe").apellido("Peponez").email("pepe@email.net")
 				.password("$2a$12$Dij9cgV3mXDQYtOo4nvQTOLaUz3URoe7DGjhBrqGa1fEEzkNVhBgq").rol("USER").build());
 	}
 
