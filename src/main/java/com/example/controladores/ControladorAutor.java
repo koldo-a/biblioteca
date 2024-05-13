@@ -18,13 +18,15 @@ import jakarta.validation.Valid;
 @RequestMapping("/")
 public class ControladorAutor {
 
+	private static final String ATRIBUTO_AUTOR = "autor";
+	private static final String REDIRECT_LISTADO_AUTORES = "redirect:/listado-autores";
 	@Autowired
 	private AutorService autorService;
 
     @GetMapping("/autor/{id}")
 	public String verDetalleAutor(@PathVariable Long id, Model model) {
 	    Autor autor = autorService.obtenerAutorPorId(id);
-	    model.addAttribute("autor", autor);
+	    model.addAttribute(ATRIBUTO_AUTOR, autor);
 	    return "detalle-autor";
 	}
 
@@ -36,27 +38,27 @@ public class ControladorAutor {
 		}
 		autorService.guardar(autor);
 
-		return "redirect:/listado-autores";
+		return REDIRECT_LISTADO_AUTORES;
 	}
 
 	@GetMapping("borrarAutor/{id}")
 	public String borrarAutor(@PathVariable Long id) {
 		autorService.borrar(id);
 
-		return "redirect:/listado-autores";
+		return REDIRECT_LISTADO_AUTORES;
 	}
 
 	@GetMapping("/listado-autores")
 	public String listarAutores(Model modelo) {
 		modelo.addAttribute("autores", autorService.listarAutores());
-		modelo.addAttribute("autor", new Autor());
+		modelo.addAttribute(ATRIBUTO_AUTOR, new Autor());
 		return "listado-autores";
 	}
 
 	@GetMapping("/editarAutor/{id}")
 	public String editarAutor(@PathVariable Long id, Model model) {
 		Autor autor = autorService.obtenerAutorPorId(id);
-		model.addAttribute("autor", autor);
+		model.addAttribute(ATRIBUTO_AUTOR, autor);
 		return "formulario-edicion-autor";
 	}
 
@@ -69,7 +71,7 @@ public class ControladorAutor {
 		
 		autorService.modificar(autor); // Guardar los cambios en el cliente
 		
-		return "redirect:/listado-autores"; // Redirigir al listado de clientes u otra vista apropiada
+		return REDIRECT_LISTADO_AUTORES; // Redirigir al listado de clientes u otra vista apropiada
 	}
 
 }

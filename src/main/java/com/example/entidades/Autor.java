@@ -41,7 +41,4 @@ public class Autor {
 	@Column(name = "email", unique = true)
 	private String email;
 	
-//    // Relación con Libro
-//    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-//    private List<Libro> libros;
 }

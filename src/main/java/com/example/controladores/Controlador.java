@@ -21,6 +21,10 @@ import jakarta.validation.Valid;
 @RequestMapping("/")
 public class Controlador {
 
+	private static final String REDIRECT_LISTADO_PRODUCTOS = "redirect:/listado-libros";
+
+	private static final String ATRIBUTO_PRODUCTO = "libro";
+
 	@Autowired
 	private LibroService libroService;
 	
@@ -30,7 +34,7 @@ public class Controlador {
     @GetMapping("/libro/{id}")
 	public String verDetalleLibro(@PathVariable Long id, Model model) {
 	    Libro libro = libroService.obtenerLibroPorId(id);
-	    model.addAttribute("libro", libro);
+	    model.addAttribute(ATRIBUTO_PRODUCTO, libro);
 	    return "detalle-libro";
 	}
 
@@ -56,7 +60,7 @@ public class Controlador {
         }
         
         model.addAttribute("libros", libros);
-        model.addAttribute("libro", new Libro());
+        model.addAttribute(ATRIBUTO_PRODUCTO, new Libro());
         return "listado-libros";
     }
     
@@ -68,14 +72,14 @@ public class Controlador {
 		}
 		libroService.guardar(libro);
 
-		return "redirect:/listado-libros";
+		return REDIRECT_LISTADO_PRODUCTOS;
 	}
 
 	@GetMapping("borrarLibro/{id}")
 	public String borrarLibro(@PathVariable Long id) {
 		libroService.borrar(id);
 
-		return "redirect:/listado-libros";
+		return REDIRECT_LISTADO_PRODUCTOS;
 	}
 
 	@GetMapping("/")
@@ -89,7 +93,7 @@ public class Controlador {
 	@GetMapping("/editarLibro/{id}")
 	public String editarLibro(@PathVariable Long id, Model model) {
 		Libro libro = libroService.obtenerLibroPorId(id);
-		model.addAttribute("libro", libro);
+		model.addAttribute(ATRIBUTO_PRODUCTO, libro);
 		return "formulario-edicion-libro";
 	}
 
@@ -103,7 +107,7 @@ public class Controlador {
 		
 		libroService.modificar(libro); // Guardar los cambios en el cliente
 		
-		return "redirect:/listado-libros"; // Redirigir al listado de clientes u otra vista apropiada
+		return REDIRECT_LISTADO_PRODUCTOS; // Redirigir al listado de clientes u otra vista apropiada
 	}
 
 	@GetMapping("login")

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
-	xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
 <title>Bienvenidos a la biblioteca</title>
 <main>
-	<h1 class="display-2 p-3">Bienvenid*</h1><h1 sec:authorize="isAuthenticated()"sec:authentication= "name" class="display-1 p-3">Bienvenidos</h1>
+	<div class="d-flex">
+		<h1 >Bienvenidos</h1></div>
+		<h1 class="display-1 p-3">Bienvenid*</h1><h1 sec:authorize="isAuthenticated()" sec:authentication="name" class="display-1 p-3">Bienvenidos</h1>
+	</div>
 </main>
