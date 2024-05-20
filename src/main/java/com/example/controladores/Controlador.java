@@ -126,6 +126,6 @@ public class Controlador {
 	public String favoritos(@PathVariable Long id) {
 		var libro = libroService.obtenerLibroPorId(id);
 		favoritos.getLibros().put(id, libro);
-		return "redirect:/"; // favoritos
+		return "redirect:/listado-libros"; // favoritos
 	}
 }

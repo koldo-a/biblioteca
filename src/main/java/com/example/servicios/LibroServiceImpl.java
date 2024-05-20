@@ -66,10 +66,10 @@ public class LibroServiceImpl implements LibroService {
 
 	@Override
 	public Libro agregarFavorito(Long id) {
-		var platoOptional = libroRepository.findById(id);
+		var libroOptional = libroRepository.findById(id);
 		
-		if(platoOptional.isPresent()) {
-			var libro = platoOptional.get();
+		if(libroOptional.isPresent()) {
+			var libro = libroOptional.get();
 			favoritos.getLibros().put(libro.getId(), libro);
 			return libro;
 		}

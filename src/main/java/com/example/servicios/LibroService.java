@@ -20,4 +20,8 @@ public interface LibroService {
 	default Libro agregarFavorito(Long id) {
 		throw new UnsupportedOperationException("NO IMPLEMENTADO");
 	}
+	
+	default boolean toggleFavorito(Long id) {
+		 throw new UnsupportedOperationException("NO IMPLEMENTADO");
+	    }
 }
