@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.entidades.Cliente;
+import com.example.dtos.Favoritos;
 import com.example.entidades.Libro;
 import com.example.entidades.Usuario;
 import com.example.repositorios.ClienteRepository;
 import com.example.repositorios.LibroRepository;
 import com.example.repositorios.UsuarioRepository;
 
-import jakarta.validation.Valid;
-
 @Service
 public class LibroServiceImpl implements LibroService {
 
 	@Autowired
 	LibroRepository libroRepository;
+	
+	@Autowired
+	Favoritos favoritos;
 
 	private Iterable<Libro> libros = new ArrayList<>();
 	
@@ -56,4 +57,25 @@ public class LibroServiceImpl implements LibroService {
 	public void modificar(Libro libro) {
 		libroRepository.save(libro);
 	}
+	
+	
+	@Override
+	public Favoritos favoritos() {
+		return favoritos;
+	}
+
+	@Override
+	public Libro agregarFavorito(Long id) {
+		var platoOptional = libroRepository.findById(id);
+		
+		if(platoOptional.isPresent()) {
+			var libro = platoOptional.get();
+			favoritos.getLibros().put(libro.getId(), libro);
+			return libro;
+		}
+		
+		throw new ServiciosException("No se ha encontrado el libro a agregar a favoritos");
+	}
+	
+	
 }

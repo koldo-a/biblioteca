@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es"
+	th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Libros</title>
+<main class="container">
+	<h1>Favoritos</h1>
+
+	<pre th:text="${favoritos}"></pre>
+
+	<ul>
+		<li th:each="libro: ${favoritos.libros}" th:text="${libro}">
+	</ul>
+</main>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dtos.Favoritos;
 import com.example.entidades.Libro;
 import com.example.entidades.Usuario;
 import com.example.repositorios.LibroRepository;
@@ -24,7 +25,13 @@ public class Controlador {
 	private static final String REDIRECT_LISTADO_PRODUCTOS = "redirect:/listado-libros";
 
 	private static final String ATRIBUTO_PRODUCTO = "libro";
-
+	
+	private Favoritos favoritos;
+	
+	public Controlador(LibroService servicio, Favoritos favoritos) {
+		this.libroService = servicio;
+		this.favoritos = favoritos;
+	}
 	@Autowired
 	private LibroService libroService;
 	
@@ -113,5 +120,12 @@ public class Controlador {
 	@GetMapping("login")
 	public String login() {
 		return "login";
+	}
+	
+	@GetMapping("favoritos/{id}")
+	public String favoritos(@PathVariable Long id) {
+		var libro = libroService.obtenerLibroPorId(id);
+		favoritos.getLibros().put(id, libro);
+		return "redirect:/"; // favoritos
 	}
 }
